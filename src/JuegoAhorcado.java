@@ -18,6 +18,9 @@ public class JuegoAhorcado {
             Ahorcado.partida();
         }
 
+            System.exit(op);
+
+
 
 
 

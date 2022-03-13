@@ -52,7 +52,16 @@ public class Ahorcado {
                 if (palabraJuego.equals(palabra)) {
                     JOptionPane.showMessageDialog(null, "Ganaste");
 
-                    Ahorcado.partida();
+                    op=0;
+
+                    op = Integer.parseInt(JOptionPane.showInputDialog(" **** MENU ****" +
+                            "\n1 --> Seguir jugando" + "\n2 --> Sair da partida"));
+
+                    if(op==1){
+                        Ahorcado.partida();
+                    }
+
+                    System.exit(op);
 
                 } else {
                     //for(int i = 5; true; i--) {
