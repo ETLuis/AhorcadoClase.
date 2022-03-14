@@ -5,13 +5,15 @@ import java.util.Scanner;
 
 public class Fichero {
 
-/*
-    public static void crearPalabra(List<Character> jugadores){
-        File fichero = new File("C:\\Users\\joerge y luis\\Desktop\\prueba.txt");
+
+    public static void crearPalabra(List<String> jugadores){
+        File fichero = new File("/home/dam1/Escritorio");
+
         try{
             Scanner leer = new Scanner(fichero);
             while (leer.hasNextLine()){
-                jugadores.add(new Character(leer.next(), leer.nextInt(), leer.nextInt(), leer.nextInt()));
+
+                jugadores.add(leer.next());
 
             }
             leer.close();
@@ -21,5 +23,5 @@ public class Fichero {
 
 
     }
-*/
+
 }

@@ -4,16 +4,17 @@ import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 public class Ahorcado {
 
-    public static void partida() {
+    public static List<String> partida() {
 
-        List<String> palabras = Arrays.asList("camion", "toro", "perro", "hawaii");
+        List<String> palabras = new ArrayList<String>();
+        Fichero.crearPalabra(palabras);
 
         Random rand = new Random();
         String palabraJuego = palabras.get(rand.nextInt(palabras.size()));
 
         System.out.println(palabraJuego);
 
-        List<Character> jugadores = new ArrayList<>();
+
 
         int intentos = 0;
 
@@ -23,12 +24,12 @@ public class Ahorcado {
                 break;
             }
 
-            if (!jugando(palabraJuego, jugadores)) {
+            if (!jugando(palabraJuego, palabras)) {
                 intentos++;
             }
 
 
-            if (verPalabras(palabraJuego, jugadores)) {
+            if (verPalabras(palabraJuego, palabras)) {
                 JOptionPane.showMessageDialog(null, "Ganaste");
             }
 
@@ -36,10 +37,11 @@ public class Ahorcado {
             JOptionPane.showMessageDialog(null, "No es correcto, continue");
 
         }
+        return palabras;
     }
 
 
-    private static void averiguar(String palabraJuego, List<Character> jugadores) {
+    private static void averiguar(String palabraJuego, List<String> palabras) {
         int op = JOptionPane.showOptionDialog(null, "¿Quieres introducir la palabra?", "Averiguar", YES_NO_OPTION, QUESTION_MESSAGE, null, new Object[]{"Si", "No"}, null);
 
 
@@ -73,7 +75,7 @@ public class Ahorcado {
 
 
             case 1:
-                Ahorcado.jugando(palabraJuego, jugadores);
+                Ahorcado.jugando(palabraJuego, palabras);
 
 
                 break;
@@ -87,22 +89,22 @@ public class Ahorcado {
 
 
 
-    private static boolean jugando(String palabraJuego, List<Character> jugadores) {
+    private static boolean jugando(String palabraJuego, List<String> palabras) {
 
         String letra = JOptionPane.showInputDialog("Introduce unha letra: ");
-        jugadores.add(letra.charAt(0));
+        palabras.add(letra.charAt(0));
 
-        Ahorcado.verPalabras(palabraJuego, jugadores);
+        Ahorcado.verPalabras(palabraJuego, palabras);
 
         return palabraJuego.contains(letra);
     }
 
-    private static boolean verPalabras(String palabraJuego, List<Character> jugadores) {
+    private static boolean verPalabras(String palabraJuego, List<String> palabras) {
         StringBuilder concatena = new StringBuilder();
         int correctas = 0;
 
         for (int i = 0; i < palabraJuego.length(); i++) {
-            if (jugadores.contains(palabraJuego.charAt(i))) {
+            if (palabras.contains(palabraJuego.charAt(i))) {
                 concatena.append(palabraJuego.charAt(i));
                 correctas++;
             } else {
@@ -114,7 +116,7 @@ public class Ahorcado {
 
         JOptionPane.showMessageDialog(null, concatena.toString());
 
-        Ahorcado.averiguar(palabraJuego, jugadores);
+        Ahorcado.averiguar(palabraJuego, palabras);
 
         return (palabraJuego.length() == correctas);
     }
